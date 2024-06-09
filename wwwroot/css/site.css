@@ -9,19 +9,45 @@
     }
 }
 
-/* Анимация для формы */
-@keyframes slideIn {
-    from {
-        transform: translateY(-50px);
-        opacity: 0;
-    }
-
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
+/* Стили для размытия фона */
+.blur-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(5px);
+    z-index: 998; /* Обеспечиваем, что он находится под меню и оверлеем */
+    pointer-events: none; /* Разрешаем клики через слой */
+    transition: backdrop-filter 0.3s ease-in-out;
+    display: none; /* Изначально скрыт */
 }
 
+    /* Стили для активации размытия */
+    .blur-background.active {
+        display: block;
+    }
+
+/* Стили для оверлея */
+.overlay {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999; /* Под меню, над фоном */
+    transition: opacity 0.3s;
+    opacity: 0;
+    display: none; /* Изначально скрыто */
+}
+
+    .overlay.active {
+        display: block;
+        opacity: 1;
+    }
+
+/* Основные стили для body и header */
 body {
     margin: 0;
     font-family: Arial, sans-serif;
@@ -31,11 +57,8 @@ body {
 
 header {
     background: linear-gradient(to right, #6a11cb, #2575fc);
-    color: #fff;
     padding: 10px;
-    position: relative;
     z-index: 1000;
-    animation: fadeInBackground 1.5s ease-in-out;
 }
 
 .container {
@@ -56,6 +79,7 @@ header {
     cursor: pointer;
 }
 
+/* Стили для бокового меню */
 .sidebar {
     height: 100%;
     width: 250px;
@@ -76,7 +100,8 @@ header {
     }
 
     /* Стили для ссылок в меню */
-    .sidebar a {
+    .sidebar a,
+    .sidebar form button {
         display: block;
         padding: 10px 20px;
         margin: 10px 15px;
@@ -88,38 +113,45 @@ header {
         border-radius: 25px; /* Скругленные углы */
         text-align: center;
         transition: all 0.3s ease;
+        cursor: pointer;
+        width: calc(100% - 30px); /* Делаем кнопки одинакового размера */
+        box-sizing: border-box;
     }
 
-        .sidebar a:hover {
+        .sidebar a:hover,
+        .sidebar form button:hover {
             background-color: #fff; /* Белый фон при наведении */
             color: #6a11cb; /* Фиолетовый текст при наведении */
             border-color: #6a11cb; /* Фиолетовая граница при наведении */
         }
 
-.overlay {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    background-color: rgba(0,0,0,0.5);
-    z-index: 500; /* Под меню */
-    transition: opacity 0.3s;
-    opacity: 0;
-    display: none; /* Изначально скрыто */
-}
-
-    .overlay.active {
-        display: block;
-        opacity: 1;
-    }
-
+/* Стили для основного контента */
 .content {
     transition: margin-right 0.3s;
 }
 
-/* Обновленный стиль для контейнера регистрации и входа */
-.registration-container, .login-container {
+.card {
+    margin-top: 20px;
+}
+
+.card-header {
+    background-color: #007bff;
+    color: white;
+}
+
+.btn-primary{
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+        border-color: #004085;
+    }
+
+/* Стили для страницы регистрации и входа */
+.registration-container,
+.login-container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -129,7 +161,8 @@ header {
 }
 
 /* Добавим фиолетовый цвет с прозрачностью для формы регистрации и входа */
-.registration-card, .login-card {
+.registration-card,
+.login-card {
     background: rgba(106, 17, 203, 0.5); /* Фиолетовый цвет с 50% прозрачностью */
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -167,18 +200,20 @@ header {
 }
 
 /* Стили для заголовка */
-.registration-header h2, .login-header h2 {
+.registration-header h2,
+.login-header h2 {
     color: #fff; /* Белый цвет текста */
     text-align: center; /* Выравнивание по центру */
 }
 
 /* Стили для кнопки регистрации и входа */
-.registration-button, .login-button {
+.registration-button,
+.login-button {
     display: block;
-    padding: 10px 20px;
+    padding: 15px 30px; /* Увеличиваем padding */
     margin: 20px auto 0 auto;
     text-decoration: none;
-    font-size: 18px;
+    font-size: 20px; /* Увеличиваем размер шрифта */
     color: #fff; /* Белый цвет текста */
     background-color: rgba(255, 255, 255, 0.2); /* Легкая прозрачность фона */
     border: 2px solid #fff; /* Белая граница */
@@ -189,11 +224,13 @@ header {
     width: fit-content;
 }
 
-    .registration-button:hover, .login-button:hover {
+    .registration-button:hover,
+    .login-button:hover {
         background-color: #fff; /* Белый фон при наведении */
         color: #6a11cb; /* Фиолетовый текст при наведении */
         border-color: #6a11cb; /* Фиолетовая граница при наведении */
     }
+
 /* Стили для чекбокса и его метки */
 .form-group-checkbox {
     display: flex;
@@ -208,4 +245,44 @@ header {
     .form-group-checkbox label {
         margin: 0;
         color: #fff; /* Белый цвет текста */
+    }
+
+.custom-checkbox {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+    .custom-checkbox input[type="checkbox"] {
+        appearance: none;
+        width: 20px;
+        height: 20px;
+        border: 2px solid #6a11cb; /* Увеличим ширину границы */
+        border-radius: 3px;
+        margin-right: 10px;
+        outline: none;
+        cursor: pointer;
+        position: relative;
+        background-color: #fff; /* Сделаем фон белым */
+    }
+
+        .custom-checkbox input[type="checkbox"]:checked {
+            background-color: #6a11cb;
+            border-color: #6a11cb;
+        }
+
+            .custom-checkbox input[type="checkbox"]:checked::after {
+                content: '';
+                position: absolute;
+                top: 4px;
+                left: 4px;
+                width: 8px;
+                height: 8px;
+                background-color: white;
+                border-radius: 2px;
+            }
+
+    .custom-checkbox label {
+        color: #fff;
+        cursor: pointer;
     }

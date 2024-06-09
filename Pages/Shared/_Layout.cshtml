@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -11,14 +11,28 @@
     <header>
         <div class="container">
             <div class="title">My Application</div>
-            <button id="menu-toggle">☰</button>
+            <button id="menu-toggle" class="btn btn-primary">☰</button>
         </div>
     </header>
 
+    <!-- Добавляем элемент размытия -->
+    <div id="blur-background" class="blur-background"></div>
+
     <nav id="sidebar" class="sidebar">
         <ul>
-            <li><a href="/Account/Login">Войти</a></li>
-            <li><a href="/Account/Register">Регистрация</a></li>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <li>
+                    <form method="post" asp-page="/Account/Logout" id="logoutForm" class="d-inline">
+                        <button type="submit" class="btn btn-primary">Выход</button>
+                    </form>
+                </li>
+            }
+            else
+            {
+                <li><a href="/Account/Login" class="btn btn-primary">Войти</a></li>
+                <li><a href="/Account/Register" class="btn btn-primary">Регистрация</a></li>
+            }
         </ul>
     </nav>
 

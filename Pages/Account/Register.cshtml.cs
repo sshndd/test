@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using RazorWeb.Models;
 
@@ -20,6 +21,8 @@ namespace RazorWeb.Pages.Account
 
         [BindProperty]
         public InputModel Input { get; set; }
+
+        public List<string> ErrorMessages { get; set; } = new List<string>();
 
         public class InputModel
         {

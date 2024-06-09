@@ -21,11 +21,11 @@ namespace RazorWeb.Pages.Account
 
         public class InputModel
         {
-            [Required]
-            [EmailAddress]
+            [Required(ErrorMessage = "Email обязателен для заполнения.")]
+            [EmailAddress(ErrorMessage = "Некорректный формат email.")]
             public string Email { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "Пароль обязателен для заполнения.")]
             [DataType(DataType.Password)]
             public string Password { get; set; }
 
@@ -45,9 +45,21 @@ namespace RazorWeb.Pages.Account
                 {
                     return RedirectToPage("/Index");
                 }
+                else if (result.IsLockedOut)
+                {
+                    ModelState.AddModelError(string.Empty, "Аккаунт заблокирован.");
+                }
+                else if (result.IsNotAllowed)
+                {
+                    ModelState.AddModelError(string.Empty, "Вход не разрешен.");
+                }
+                else if (result.RequiresTwoFactor)
+                {
+                    ModelState.AddModelError(string.Empty, "Требуется двухфакторная аутентификация.");
+                }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    ModelState.AddModelError(string.Empty, "Неверный email или пароль.");
                 }
             }
 

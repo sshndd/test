@@ -15,6 +15,10 @@ namespace RazorWeb.Pages.Account
             _signInManager = signInManager;
         }
 
+        public void OnGet()
+        {
+        }
+
         public async Task<IActionResult> OnPostAsync()
         {
             await _signInManager.SignOutAsync();

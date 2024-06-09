@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\repos\\RazorWeb\\RazorWeb\\RazorWeb.csproj": {}
+    "D:\\repos\\RazorWeb\\razorweb\\RazorWeb.csproj": {}
   },
   "projects": {
-    "D:\\repos\\RazorWeb\\RazorWeb\\RazorWeb.csproj": {
+    "D:\\repos\\RazorWeb\\razorweb\\RazorWeb.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\repos\\RazorWeb\\RazorWeb\\RazorWeb.csproj",
+        "projectUniqueName": "D:\\repos\\RazorWeb\\razorweb\\RazorWeb.csproj",
         "projectName": "RazorWeb",
-        "projectPath": "D:\\repos\\RazorWeb\\RazorWeb\\RazorWeb.csproj",
+        "projectPath": "D:\\repos\\RazorWeb\\razorweb\\RazorWeb.csproj",
         "packagesPath": "C:\\Users\\romas\\.nuget\\packages\\",
-        "outputPath": "D:\\repos\\RazorWeb\\RazorWeb\\obj\\",
+        "outputPath": "D:\\repos\\RazorWeb\\razorweb\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "Z:\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -71,6 +71,10 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[8.0.6, )"
+            },
+            "Serilog.Extensions.Logging.File": {
+              "target": "Package",
+              "version": "[3.0.0, )"
             }
           },
           "imports": [
